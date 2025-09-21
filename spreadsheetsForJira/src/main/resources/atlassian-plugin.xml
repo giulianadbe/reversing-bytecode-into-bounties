@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2"> 
+  <plugin-info> 
+    <description>${project.description}</description>  
+    <version>${project.version}</version>  
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>  
+    <param name="plugin-icon">images/pluginIcon.png</param>  
+    <param name="plugin-logo">images/pluginLogo.png</param>  
+    <param name="configure.url">/secure/SpreadsheetConfigure.jspa</param> 
+  </plugin-info>  
+
+  <!-- webwork action to render the configure velocity template -->  
+  <webwork1 key="spreadsheets-configure-action" name="Spreadsheets Configure Action"> 
+    <description>Renders the Spreadsheets for Jira configuration page</description>  
+    <actions> 
+      <action name="com.atlassian.spreadsheets.webwork.SpreadsheetConfigureAction" alias="SpreadsheetConfigure" roles-required="admin"> 
+        <param name="permittedMethods">GET</param>  
+        <view name="success">/templates/spreadsheets/configure.vm</view> 
+      </action>  
+      <action name="com.atlassian.spreadsheets.webwork.SpreadsheetUploadAction" alias="SpreadsheetUpload" roles-required="admin"> 
+        <param name="permittedMethods">GET,HEAD,POST</param>  
+        <view name="input">/templates/spreadsheets/upload.vm</view>  
+        <view name="success">/templates/spreadsheets/configure.vm</view> 
+      </action> 
+    </actions> 
+  </webwork1>  
+  <!-- add our i18n resource -->  
+  <resource type="i18n" name="i18n" location="spreadsheetsForJira"/>  
+
+  <!-- add our web resources -->  
+  <web-resource key="spreadsheetsForJira-resources" name="spreadsheetsForJira Web Resources"> 
+    <dependency>com.atlassian.auiplugin:ajs</dependency>  
+    <resource type="download" name="spreadsheetsForJira.css" location="/css/spreadsheetsForJira.css"/>  
+    <resource type="download" name="spreadsheetsForJira.js" location="/js/spreadsheetsForJira.js"/>  
+    <resource type="download" name="images/" location="/images"/>  
+    <context>spreadsheetsForJira</context> 
+  </web-resource>  
+
+  <rest name="Spreadsheet Rest Resource" key="my-rest-resource" path="/spreadsheet" version="1.0"> 
+    <description key="my-rest-resource.description">Spreadsheet Resource Plugin</description>
+    <package>com.atlassian.spreadsheets.rest</package>
+  </rest>
+
+</atlassian-plugin>

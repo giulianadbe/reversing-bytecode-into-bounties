@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spreadsheet XML Processor - Configuration</title>
+    <meta name="decorator" content="atl.admin">
+</head>
+<body>
+    <header class="aui-page-header">
+        <div class="aui-page-header-inner">
+            <div class="aui-page-header-main">
+                <h1>Spreadsheet XML Processor Configuration</h1>
+                <p class="aui-page-header-description">Configure the XXE vulnerability demonstration plugin</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="aui-page-panel">
+        <div class="aui-page-panel-inner">
+            <section class="aui-page-panel-content">
+                
+                <div class="vulnerable-warning" style="background-color: #ffebee; border: 2px solid #f44336; padding: 15px; margin: 10px 0; border-radius: 5px; color: #d32f2f; font-weight: bold;">
+                    ⚠️ <strong>WARNING:</strong> This plugin is intentionally vulnerable for educational purposes only!
+                </div>
+
+                <div class="aui-group">
+                    <div class="aui-item">
+                        <h3>Plugin Information</h3>
+                        <p>This plugin demonstrates XXE (XML External Entity) vulnerabilities in JIRA plugins.</p>
+                        
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>XML file upload and processing</li>
+                            <li>Vulnerable XML parsing (intentional)</li>
+                            <li>REST API endpoints for testing</li>
+                            <li>Educational examples and payloads</li>
+                        </ul>
+
+                        <h4>Access the Tool:</h4>
+                        <p><a href="/jira/secure/SpreadsheetUpload!default.jspa" class="aui-button aui-button-primary">
+                            Go to Spreadsheet XML Processor
+                        </a></p>
+                        
+                        <h4>Security Notice:</h4>
+                        <p style="color: #d32f2f;">
+                            <strong>Do NOT use this plugin in production environments!</strong><br/>
+                            This plugin contains intentional security vulnerabilities for educational and testing purposes only.
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</body>
+</html>
+
+

