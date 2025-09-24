@@ -36,26 +36,26 @@ For example if you wanted to run Jira DC version 10.6.1 you could use: `atlas-ru
 Then you can install the plugin by uploading it's jar or obr to the instance as the admin user.
 
 ### References
+[Atlassian Marketplace](https://marketplace.atlassian.com/)
 
-https://developer.atlassian.com/server/framework/atlassian-sdk/rest-plugin-module/ 
+[Documentation on atlassian-plugin.xml](https://developer.atlassian.com/server/framework/atlassian-sdk/rest-plugin-module/) 
 
-https://developer.atlassian.com/platform/marketplace/dc-apps-platform-7-preparing-for-secure-endpoints/#:~:text=However%2C%20from%20Jira%20Software%2010.0,With%20the%20class%20ExampleServlet%20: 
+[Marketplace app security annotations](https://developer.atlassian.com/platform/marketplace/dc-apps-platform-7-preparing-for-secure-endpoints/)
 
-https://developer.atlassian.com/platform/marketplace/security-requirements-dc/#:~:text=Sensitive%20Data%20Management&text=An%20application%20must%20securely%20store,or%20within%20the%20source%20code.    
+[Security requirements for apps](https://developer.atlassian.com/platform/marketplace/security-requirements-dc/)
 
-https://marketplace.atlassian.com/  
 
 ### Tools
 
-https://developer.atlassian.com/server/framework/atlassian-sdk/install-the-atlassian-sdk-on-a-linux-or-mac-system/ & https://developer.atlassian.com/server/framework/atlassian-sdk/atlas-run/  
+https://developer.atlassian.com/server/framework/atlassian-sdk/install-the-atlassian-sdk-on-a-linux-or-mac-system/
 
-https://github.com/mstrobel/procyon/releases/tag/v0.6.0  
+[https://github.com/mstrobel/procyon](https://github.com/mstrobel/procyon/releases)
 
 https://www.benf.org/other/cfr/  
 
 https://semgrep.dev/docs/getting-started/quickstart 
 
-https://www.jetbrains.com/idea/download/?section=mac 
+https://www.jetbrains.com/idea/download/  
 
 ### Join Private Atlassian Marketplace Bounty Programs
 
