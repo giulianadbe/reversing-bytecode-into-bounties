@@ -58,8 +58,9 @@ https://semgrep.dev/docs/getting-started/quickstart
 https://www.jetbrains.com/idea/download/  
 
 ### Contact us
-https://www.linkedin.com/in/giuliana-de-bellis/
-https://www.linkedin.com/in/jamalhopwood/ 
+https://www.linkedin.com/in/giuliana-de-bellis/  
+
+https://www.linkedin.com/in/jamalhopwood/  
 
 ### Join Private Atlassian Marketplace Bounty Programs
 
