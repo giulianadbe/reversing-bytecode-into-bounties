@@ -65,3 +65,26 @@ https://www.linkedin.com/in/jamalhopwood/
 ### Join Private Atlassian Marketplace Bounty Programs
 
 https://bugcrowd-support.freshdesk.com 
+
+### DC Plugin Hacking Tips
+
+#### Annotations
+
+Look out for the presence of, or lack of, the following annotations. If you can identify annotation misuse you might just find yourself an unauthenticated endpoint, or a broken access control vulnerability.
+
+[Annocation documentation](https://developer.atlassian.com/platform/marketplace/dc-apps-platform-7-preparing-for-secure-endpoints/#prepare-your-data-center-app-to-comply-with-secure-endpoint-defaults)
+
+`@WebSudoRequired`
+`@AnonymousSiteAccess`
+`@UnrestrictedAccess`
+`@AdminOnly` 
+
+#### HTML Encoding
+
+From Jira 6 onwards, HTML encoding is enabled for all Velocity templates by default. However, you can disable it with this cheeky annotation. It's an odd function name since it isnt escaping something but instead encoding it. If you find this annotation you might have XSS. [Documentation](https://developer.atlassian.com/server/jira/platform/jira-6-0-html-escaping-for-velocity-templates/#disabling-automatic-html-escaping).
+
+`#disable_html_escaping()`
+
+#### Gating Paid Features
+
+Some apps will restrict access to paid features with UI only controls. E.g., a greyed out button. Try hitting the endpoint directly with a curl request and see if it works, it might just work.
