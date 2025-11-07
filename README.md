@@ -87,4 +87,4 @@ From Jira 6 onwards, HTML encoding is enabled for all Velocity templates by defa
 
 #### Gating Paid Features
 
-Some apps will restrict access to paid features with UI only controls. E.g., a greyed out button. Try hitting the endpoint directly with a curl request and see if it works, it might just work.
+Some apps will restrict access to paid features with UI only controls. E.g., a greyed out button. Try hitting the endpoint directly with a curl request and see if it works.
